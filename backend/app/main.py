@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 
-from app.routers import profiles
+from app.routers import exercises, profiles
 
 app = FastAPI()
 
 app.include_router(profiles.router)
+app.include_router(exercises.router)
 
 
 @app.get("/health")
