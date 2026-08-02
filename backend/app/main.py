@@ -1,3 +1,4 @@
+import asyncio
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -12,7 +13,7 @@ from app.routers import exercises, profiles, templates, workouts
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    import_exercises(settings.media_path)
+    await asyncio.to_thread(import_exercises, settings.media_path)
     yield
 
 

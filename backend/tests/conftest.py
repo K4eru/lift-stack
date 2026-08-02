@@ -56,6 +56,33 @@ def _override_get_db() -> Generator[Session]:
 app.dependency_overrides[get_db] = _override_get_db
 
 
+@pytest.fixture(autouse=True)
+def _cleanup_between_tests() -> Generator[None]:
+    yield
+    from sqlalchemy import text
+
+    from app.models import Exercise
+
+    with Session(engine) as db:
+        db.execute(text("PRAGMA foreign_keys = OFF"))
+        for table in reversed(Base.metadata.sorted_tables):
+            db.execute(table.delete())
+        db.execute(text("PRAGMA foreign_keys = ON"))
+        # Re-seed the test exercise for FK constraints
+        db.add(
+            Exercise(
+                id="0001",
+                name="Bench Press",
+                category="strength",
+                body_part="chest",
+                equipment="barbell",
+                target="pectorals",
+                muscle_group="chest",
+            )
+        )
+        db.commit()
+
+
 @pytest.fixture
 def client() -> TestClient:
     return TestClient(app)

@@ -17,7 +17,7 @@ services:
       DATABASE_URL: postgresql://liftstack:password@postgres:5432/liftstack
       MEDIA_PATH: /data/exercises-dataset
     volumes:
-      - /home/max/exercises-dataset:/data/exercises-dataset:ro
+      - ${EXERCISES_DATASET_PATH:-./exercises-dataset}:/data/exercises-dataset:ro
     ports:
       - "8000:8000"
     depends_on:
