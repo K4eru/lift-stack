@@ -35,8 +35,11 @@ frontend/  React + Vite app
 - Write tests with pytest alongside the code they cover.
 
 ## Workflow
-- Follow the repo's branch flow (currently `1-bootstrap-project`).
-- Do not commit unless explicitly asked.
+- Follow the repo's branch flow.
+- Branch naming: `number-name-of-branch` (incremental number per feature, e.g., `1-bootstrap-project`, `2-planning`, `3-ai-agent-planning`)
+- **Always confirm before committing** — ask for explicit approval before any commit or push.
+- Use **conventional commits** format: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
+- Do not commit or push unless explicitly asked.
 
 ## Pending decisions
 - [ ] Deploy pipeline design (k3s) — revisit once cluster exists
