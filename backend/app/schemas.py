@@ -62,6 +62,54 @@ class TemplateCreate(BaseModel):
     exercises: list[TemplateExerciseCreate]
 
 
+class WorkoutSetCreate(BaseModel):
+    exercise_id: str
+    set_number: int
+    reps: int
+    weight: float | None = None
+    duration_seconds: int | None = None
+    rest_seconds: int | None = None
+    notes: str | None = None
+
+
+class WorkoutSetResponse(BaseModel):
+    id: UUID
+    exercise_id: str
+    set_number: int
+    reps: int
+    weight: float | None
+    duration_seconds: int | None
+    rest_seconds: int | None
+    notes: str | None
+    completed_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+class WorkoutCreate(BaseModel):
+    name: str
+    profile_id: UUID
+    template_id: UUID | None = None
+
+
+class WorkoutUpdate(BaseModel):
+    completed_at: datetime | None = None
+    notes: str | None = None
+
+
+class WorkoutResponse(BaseModel):
+    id: UUID
+    profile_id: UUID
+    template_id: UUID | None
+    name: str
+    started_at: datetime
+    completed_at: datetime | None
+    notes: str | None
+    sets: list[WorkoutSetResponse]
+
+    model_config = {"from_attributes": True}
+
+
 class TemplateResponse(BaseModel):
     id: UUID
     name: str

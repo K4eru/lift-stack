@@ -26,6 +26,24 @@ def _set_sqlite_pragma(dbapi_connection, _connection_record) -> None:
 
 Base.metadata.create_all(engine)
 
+# Seed a test exercise (needed for FK constraints on workout_sets and template_exercises)
+from app.models import Exercise
+
+with Session(engine) as seed_db:
+    if not seed_db.query(Exercise).filter(Exercise.id == "0001").first():
+        seed_db.add(
+            Exercise(
+                id="0001",
+                name="Bench Press",
+                category="strength",
+                body_part="chest",
+                equipment="barbell",
+                target="pectorals",
+                muscle_group="chest",
+            )
+        )
+        seed_db.commit()
+
 
 def _override_get_db() -> Generator[Session]:
     db = Session(engine)
