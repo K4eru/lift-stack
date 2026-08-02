@@ -5,6 +5,8 @@ description = "Backend for lift-stack, a PWA exercise app"
 requires-python = ">=3.14"
 dependencies = [
     "fastapi",
+    "pydantic-settings",
+    "sqlalchemy",
     "uvicorn",
 ]
 
