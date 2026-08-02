@@ -43,6 +43,8 @@ class Profile(Base):
     name = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.now(UTC))
 
+    workouts = relationship("Workout", back_populates="profile")
+
 
 class WorkoutTemplate(Base):
     __tablename__ = "workout_templates"
