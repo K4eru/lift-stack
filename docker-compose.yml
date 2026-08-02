@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: liftstack
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: liftstack
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    command: postgres -c max_connections=10
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql://liftstack:password@postgres:5432/liftstack
+      MEDIA_PATH: /data/exercises-dataset
+    volumes:
+      - /home/max/exercises-dataset:/data/exercises-dataset:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
