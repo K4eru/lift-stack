@@ -1,8 +1,19 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
+from app.config import settings
+from app.migrate import import_exercises
 from app.routers import exercises, profiles, templates, workouts
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    import_exercises(settings.media_path)
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 app.include_router(profiles.router)
 app.include_router(exercises.router)
