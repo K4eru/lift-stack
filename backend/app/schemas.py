@@ -35,3 +35,39 @@ class ExerciseResponse(BaseModel):
     gif_url: str | None
 
     model_config = {"from_attributes": True}
+
+
+class TemplateExerciseCreate(BaseModel):
+    exercise_id: str
+    target_sets: int | None = None
+    target_reps: int | None = None
+    target_weight: float | None = None
+
+
+class TemplateExerciseResponse(BaseModel):
+    id: UUID
+    exercise_id: str
+    target_sets: int | None
+    target_reps: int | None
+    target_weight: float | None
+    order: int
+    exercise: ExerciseResponse
+
+    model_config = {"from_attributes": True}
+
+
+class TemplateCreate(BaseModel):
+    name: str
+    description: str | None = None
+    exercises: list[TemplateExerciseCreate]
+
+
+class TemplateResponse(BaseModel):
+    id: UUID
+    name: str
+    description: str | None
+    is_system: bool
+    created_by: UUID | None
+    exercises: list[TemplateExerciseResponse]
+
+    model_config = {"from_attributes": True}
