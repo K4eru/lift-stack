@@ -2,10 +2,18 @@ import json
 import tempfile
 from pathlib import Path
 
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.migrate import import_exercises
 from app.models import Exercise
+
+
+def _clear_exercises(db: Session) -> None:
+    db.execute(text("PRAGMA foreign_keys = OFF"))
+    db.query(Exercise).delete()
+    db.commit()
+    db.execute(text("PRAGMA foreign_keys = ON"))
 
 
 def test_import_exercises(db_session: Session) -> None:
@@ -34,8 +42,7 @@ def test_import_exercises(db_session: Session) -> None:
         with open(data_path / "exercises.json", "w") as f:
             json.dump(exercises_data, f)
 
-        db_session.query(Exercise).delete()
-        db_session.commit()
+        _clear_exercises(db_session)
 
         import_exercises(str(tmpdir), db=db_session)
 
@@ -48,8 +55,7 @@ def test_import_exercises(db_session: Session) -> None:
 
 
 def test_import_exercises_skips_if_present(db_session: Session) -> None:
-    db_session.query(Exercise).delete()
-    db_session.commit()
+    _clear_exercises(db_session)
     db_session.add(
         Exercise(
             id="seed",
@@ -89,8 +95,7 @@ def test_import_exercises_skips_if_present(db_session: Session) -> None:
 
 
 def test_import_exercises_missing_file(db_session: Session, capsys) -> None:
-    db_session.query(Exercise).delete()
-    db_session.commit()
+    _clear_exercises(db_session)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         import_exercises(str(tmpdir), db=db_session)

@@ -1,15 +1,31 @@
 from uuid import uuid4
 
 from fastapi.testclient import TestClient
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.models import Exercise, WorkoutTemplate, WorkoutTemplateExercise
+from app.models import (
+    Exercise,
+    Workout,
+    WorkoutSet,
+    WorkoutTemplate,
+    WorkoutTemplateExercise,
+)
 
 
-def _seed_exercise(db: Session) -> None:
+def _clear_all(db: Session) -> None:
+    db.execute(text("PRAGMA foreign_keys = OFF"))
+    db.query(WorkoutSet).delete()
+    db.query(Workout).delete()
     db.query(WorkoutTemplateExercise).delete()
     db.query(WorkoutTemplate).delete()
     db.query(Exercise).delete()
+    db.commit()
+    db.execute(text("PRAGMA foreign_keys = ON"))
+
+
+def _seed_exercise(db: Session) -> None:
+    _clear_all(db)
     db.add_all(
         [
             Exercise(
@@ -32,7 +48,8 @@ def _seed_exercise(db: Session) -> None:
     db.commit()
 
 
-def test_list_templates_empty(client: TestClient) -> None:
+def test_list_templates_empty(client: TestClient, db_session: Session) -> None:
+    _clear_all(db_session)
     response = client.get("/templates")
     assert response.status_code == 200
     data = response.json()
