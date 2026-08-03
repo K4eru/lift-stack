@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { ProfilePicker } from './components/ProfilePicker'
 import { Dashboard } from './components/Dashboard'
 import { ExerciseBrowser } from './components/ExerciseBrowser'
+import { Templates } from './components/Templates'
 import type { Profile } from './api/types'
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
     switch (screen) {
       case 'exercises':
         return <ExerciseBrowser />
+      case 'templates':
+        return <Templates />
       default:
         return <Dashboard profile={profile} onNavigate={setScreen} />
     }
