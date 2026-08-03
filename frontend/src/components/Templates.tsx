@@ -4,7 +4,12 @@ import type { Template } from '../api/types'
 import { TemplateDetail } from './TemplateDetail'
 import { CreateTemplate } from './CreateTemplate'
 
-export function Templates() {
+interface Props {
+  onSubViewChange?: (inSubView: boolean) => void
+  onStartWorkout: (templateId: string) => void
+}
+
+export function Templates({ onSubViewChange, onStartWorkout }: Props) {
   const [templateList, setTemplateList] = useState<Template[]>([])
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
   const [creating, setCreating] = useState(false)
@@ -21,12 +26,18 @@ export function Templates() {
       .finally(() => setLoading(false))
   }, [])
 
+  useEffect(() => {
+    onSubViewChange?.(!!selectedTemplate || creating)
+  }, [selectedTemplate, creating, onSubViewChange])
+
   if (creating) {
     return (
       <CreateTemplate
         onDone={() => {
           setCreating(false)
-          templates.list().then(setTemplateList)
+          templates.list()
+            .then(setTemplateList)
+            .catch((err) => setError(err.message || 'Failed to refresh templates'))
         }}
       />
     )
@@ -37,6 +48,7 @@ export function Templates() {
       <TemplateDetail
         template={selectedTemplate}
         onBack={() => setSelectedTemplate(null)}
+        onStartWorkout={onStartWorkout}
       />
     )
   }

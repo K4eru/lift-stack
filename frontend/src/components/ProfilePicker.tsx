@@ -9,9 +9,12 @@ interface Props {
 export function ProfilePicker({ onSelect }: Props) {
   const [profileList, setProfileList] = useState<Profile[]>([])
   const [newName, setNewName] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    profiles.list().then(setProfileList).catch(() => {})
+    profiles.list()
+      .then(setProfileList)
+      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load profiles'))
   }, [])
 
   const handleCreate = async () => {
@@ -20,13 +23,17 @@ export function ProfilePicker({ onSelect }: Props) {
       const profile = await profiles.create(newName.trim())
       setProfileList(prev => [...prev, profile])
       setNewName('')
-    } catch {}
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to create profile')
+    }
   }
 
   return (
     <div className="max-w-md mx-auto mt-20 px-4 text-center">
       <h1 className="text-3xl font-bold mb-2">Lift-Stack</h1>
       <p className="text-text-secondary mb-8">Select your profile</p>
+
+      {error && <div className="text-red-500 text-center text-sm mb-4">{error}</div>}
 
       <div className="flex flex-col gap-3 mb-8">
         {profileList.map(profile => (
