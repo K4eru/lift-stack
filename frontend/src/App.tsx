@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { ProfilePicker } from './components/ProfilePicker'
+import { Dashboard } from './components/Dashboard'
 import type { Profile } from './api/types'
 
 function App() {
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [, setScreen] = useState('dashboard')
 
   useEffect(() => {
     const saved = localStorage.getItem('profile')
@@ -22,9 +24,9 @@ function App() {
   }
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+    <div className="max-w-xl mx-auto">
+      <div className="flex items-center justify-between p-4 border-b border-border">
+        <span className="text-text-secondary">{profile.name}</span>
         <button
           className="bg-bg-secondary hover:bg-bg-tertiary text-text-secondary px-4 py-2 rounded-lg text-sm transition-colors"
           onClick={() => {
@@ -35,7 +37,7 @@ function App() {
           Switch Profile
         </button>
       </div>
-      <p className="text-text-secondary">Welcome, {profile.name}</p>
+      <Dashboard profile={profile} onNavigate={setScreen} />
     </div>
   )
 }
