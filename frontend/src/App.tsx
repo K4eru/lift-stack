@@ -3,6 +3,7 @@ import { ProfilePicker } from './components/ProfilePicker'
 import { Dashboard } from './components/Dashboard'
 import { ExerciseBrowser } from './components/ExerciseBrowser'
 import { Templates } from './components/Templates'
+import { WorkoutHistory } from './components/WorkoutHistory'
 import { WorkoutSession } from './components/WorkoutSession'
 import type { Profile } from './api/types'
 
@@ -34,6 +35,8 @@ function App() {
         return <Templates />
       case 'workout':
         return <WorkoutSession profile={profile} onDone={() => setScreen('dashboard')} />
+      case 'history':
+        return <WorkoutHistory profileId={profile.id} />
       default:
         return <Dashboard profile={profile} onNavigate={setScreen} />
     }
