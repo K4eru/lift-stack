@@ -16,9 +16,11 @@ export function ProfilePicker({ onSelect }: Props) {
 
   const handleCreate = async () => {
     if (!newName.trim()) return
-    const profile = await profiles.create(newName.trim())
-    setProfileList([...profileList, profile])
-    setNewName('')
+    try {
+      const profile = await profiles.create(newName.trim())
+      setProfileList(prev => [...prev, profile])
+      setNewName('')
+    } catch {}
   }
 
   return (
