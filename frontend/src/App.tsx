@@ -1,10 +1,8 @@
-import './App.css'
-
 function App() {
   return (
-    <div className="container">
-      <h1>Lift-Stack</h1>
-      <p className="text-secondary">Workout Assistant</p>
+    <div className="max-w-xl mx-auto p-4">
+      <h1 className="text-3xl font-bold">Lift-Stack</h1>
+      <p className="text-text-secondary">Workout Assistant</p>
     </div>
   )
 }
