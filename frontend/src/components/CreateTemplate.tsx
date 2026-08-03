@@ -12,9 +12,14 @@ export function CreateTemplate({ onDone }: Props) {
   const [selectedExercises, setSelectedExercises] = useState<string[]>([])
   const [exerciseList, setExerciseList] = useState<Exercise[]>([])
   const [search, setSearch] = useState('')
+  const [exercisesError, setExercisesError] = useState<string | null>(null)
+  const [createError, setCreateError] = useState<string | null>(null)
+  const [creating, setCreating] = useState(false)
 
   useEffect(() => {
-    exercises.list().then(setExerciseList)
+    exercises.list()
+      .then(setExerciseList)
+      .catch((err) => setExercisesError(err.message || 'Failed to load exercises'))
   }, [])
 
   const filtered = exerciseList.filter((ex) =>
@@ -32,17 +37,26 @@ export function CreateTemplate({ onDone }: Props) {
   }
 
   const handleCreate = async () => {
-    if (!name.trim()) return
-    await templates.create({
-      name,
-      description: description || undefined,
-      exercises: selectedExercises.map((id) => ({
-        exercise_id: id,
-        target_sets: 3,
-        target_reps: 10,
-      })),
-    })
-    onDone()
+    if (!name.trim() || selectedExercises.length === 0 || creating) return
+    setCreating(true)
+    setCreateError(null)
+    try {
+      await templates.create({
+        name,
+        description: description || undefined,
+        exercises: selectedExercises.map((id) => ({
+          exercise_id: id,
+          target_sets: 3,
+          target_reps: 10,
+        })),
+      })
+      onDone()
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to create template'
+      setCreateError(msg)
+    } finally {
+      setCreating(false)
+    }
   }
 
   return (
@@ -95,6 +109,9 @@ export function CreateTemplate({ onDone }: Props) {
       </div>
 
       <h3 className="text-lg font-semibold mb-2">Add Exercises</h3>
+      {exercisesError && (
+        <div className="text-red-500 text-sm mb-2">{exercisesError}</div>
+      )}
       <input
         type="text"
         placeholder="Search..."
@@ -119,12 +136,16 @@ export function CreateTemplate({ onDone }: Props) {
         ))}
       </div>
 
+      {createError && (
+        <div className="text-red-500 text-center text-sm mt-2">{createError}</div>
+      )}
+
       <button
         className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-medium mt-6 transition-colors disabled:opacity-50"
         onClick={handleCreate}
-        disabled={!name.trim()}
+        disabled={!name.trim() || selectedExercises.length === 0 || creating}
       >
-        Create Template
+        {creating ? 'Creating...' : 'Create Template'}
       </button>
     </div>
   )
