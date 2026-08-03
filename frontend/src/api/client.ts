@@ -54,7 +54,11 @@ export const templates = {
     return fetchJSON<Template[]>(`${API_BASE}/templates${params}`)
   },
   get: (id: string) => fetchJSON<Template>(`${API_BASE}/templates/${id}`),
-  create: (data: { name: string; description?: string; exercises: any[] }) =>
+  create: (data: {
+    name: string
+    description?: string
+    exercises: { exercise_id: string; target_sets?: number; target_reps?: number }[]
+  }) =>
     fetchJSON<Template>(`${API_BASE}/templates`, {
       method: 'POST',
       body: JSON.stringify(data),

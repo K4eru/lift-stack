@@ -3,7 +3,11 @@ import { exercises } from '../api/client'
 import type { Exercise } from '../api/types'
 import { ExerciseDetail } from './ExerciseDetail'
 
-export function ExerciseBrowser() {
+interface Props {
+  onSubViewChange?: (inSubView: boolean) => void
+}
+
+export function ExerciseBrowser({ onSubViewChange }: Props) {
   const [exerciseList, setExerciseList] = useState<Exercise[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
@@ -25,6 +29,10 @@ export function ExerciseBrowser() {
       .catch((err) => setError(err.message || 'Failed to load exercises'))
       .finally(() => setLoading(false))
   }, [search, category, equipment])
+
+  useEffect(() => {
+    onSubViewChange?.(!!selectedExercise)
+  }, [selectedExercise, onSubViewChange])
 
   if (selectedExercise) {
     return (

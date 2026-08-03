@@ -4,10 +4,11 @@ import type { Profile, Workout } from '../api/types'
 
 interface Props {
   profile: Profile
+  templateId?: string
   onDone: () => void
 }
 
-export function WorkoutSession({ profile, onDone }: Props) {
+export function WorkoutSession({ profile, templateId, onDone }: Props) {
   const [workout, setWorkout] = useState<Workout | null>(null)
   const [selectedExercise, setSelectedExercise] = useState('')
   const [reps, setReps] = useState(10)
@@ -20,10 +21,10 @@ export function WorkoutSession({ profile, onDone }: Props) {
 
   useEffect(() => {
     workouts
-      .start('Quick Workout', profile.id)
+      .start(templateId ? 'Template Workout' : 'Quick Workout', profile.id, templateId)
       .then(setWorkout)
       .catch((err) => setError(err.message || 'Failed to start workout'))
-  }, [profile.id])
+  }, [profile.id, templateId])
 
   useEffect(() => {
     if (restTimer <= 0) return

@@ -3,9 +3,10 @@ import type { Template } from '../api/types'
 interface Props {
   template: Template
   onBack: () => void
+  onStartWorkout: (templateId: string) => void
 }
 
-export function TemplateDetail({ template, onBack }: Props) {
+export function TemplateDetail({ template, onBack, onStartWorkout }: Props) {
   return (
     <div className="p-4">
       <button
@@ -42,7 +43,10 @@ export function TemplateDetail({ template, onBack }: Props) {
         ))}
       </div>
 
-      <button className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-medium mt-6 transition-colors">
+      <button
+        className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-medium mt-6 transition-colors"
+        onClick={() => onStartWorkout(template.id)}
+      >
         Start Workout
       </button>
     </div>

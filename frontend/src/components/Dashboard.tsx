@@ -1,11 +1,13 @@
 import type { Profile } from '../api/types'
 
+type Screen = 'dashboard' | 'exercises' | 'templates' | 'workout' | 'history'
+
 interface Props {
   profile: Profile
-  onNavigate: (screen: string) => void
+  onNavigate: (screen: Screen) => void
 }
 
-const actions = [
+const actions: { id: Screen; icon: string; title: string; desc: string }[] = [
   { id: 'workout', icon: '🏋️', title: 'Start Workout', desc: 'Begin a new session' },
   { id: 'exercises', icon: '💪', title: 'Browse Exercises', desc: 'View exercise library' },
   { id: 'templates', icon: '📋', title: 'My Templates', desc: 'Workout templates' },
