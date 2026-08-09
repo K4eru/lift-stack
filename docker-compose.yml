@@ -10,6 +10,11 @@ services:
     ports:
       - "5432:5432"
     command: postgres -c max_connections=10
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U liftstack -d liftstack"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: ./backend
@@ -18,10 +23,12 @@ services:
       MEDIA_PATH: /data/exercises-dataset
     volumes:
       - ${EXERCISES_DATASET_PATH:-./exercises-dataset}:/data/exercises-dataset:ro
+      - ./frontend/dist:/app/../frontend/dist:ro
     ports:
       - "8000:8000"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:

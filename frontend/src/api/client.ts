@@ -1,6 +1,6 @@
 import type { Profile, Exercise, Template, Workout, WorkoutSet } from './types'
 
-const API_BASE = '/api'
+const API_BASE = ''
 
 async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, {
