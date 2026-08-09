@@ -1,7 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './main.css'
-import App from './App.tsx'
+import './globals.css'
+
+function App() {
+  return <div className="p-4 text-foreground">lift-stack</div>
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
