@@ -48,7 +48,7 @@ export function ExercisePicker({ exercises, quickPicks = [], onSelect }: Props) 
             <span className="text-xs text-text-secondary">{ex.equipment}</span>
           </button>
         ))}
-        {filtered.length === 0 && (
+        {exercises.length > 0 && filtered.length === 0 && (
           <p className="text-sm text-text-secondary text-center py-4">No exercises found</p>
         )}
       </div>

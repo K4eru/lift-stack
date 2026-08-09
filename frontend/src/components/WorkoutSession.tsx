@@ -102,6 +102,8 @@ export function WorkoutSession({ profile, templateId, onDone }: Props) {
     )
   }
 
+  const nameMap = exerciseMap()
+
   return (
     <div className="p-4">
       <div className="flex items-center justify-between mb-4">
@@ -211,7 +213,7 @@ export function WorkoutSession({ profile, templateId, onDone }: Props) {
         <h3 className="font-semibold mb-2">Sets Logged ({workout.sets?.length || 0})</h3>
         <div className="space-y-2">
           {workout.sets?.map((set) => {
-            const name = exerciseMap().get(set.exercise_id)?.name || set.exercise_id
+            const name = nameMap.get(set.exercise_id)?.name || set.exercise_id
             return (
             <div key={set.id} className="bg-bg-secondary rounded-lg p-3">
               <div className="flex justify-between items-center">
