@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import { workouts } from '../api/client'
-import type { Profile, Workout } from '../api/types'
+import { workouts, exercises, templates } from '../api/client'
+import type { Profile, Workout, Exercise } from '../api/types'
+import { ExercisePicker } from './ExercisePicker'
 
 interface Props {
   profile: Profile
@@ -10,7 +11,10 @@ interface Props {
 
 export function WorkoutSession({ profile, templateId, onDone }: Props) {
   const [workout, setWorkout] = useState<Workout | null>(null)
-  const [selectedExercise, setSelectedExercise] = useState('')
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null)
+  const [exerciseList, setExerciseList] = useState<Exercise[]>([])
+  const [quickPicks, setQuickPicks] = useState<Exercise[]>([])
+  const [listError, setListError] = useState<string | null>(null)
   const [reps, setReps] = useState(10)
   const [weight, setWeight] = useState(0)
   const [duration, setDuration] = useState(0)
@@ -32,12 +36,36 @@ export function WorkoutSession({ profile, templateId, onDone }: Props) {
     return () => clearTimeout(id)
   }, [restTimer])
 
+  const loadExercises = useCallback(() => {
+    setListError(null)
+    exercises
+      .list()
+      .then(setExerciseList)
+      .catch((err) => setListError(err.message || 'Failed to load exercises'))
+  }, [])
+
+  useEffect(() => {
+    loadExercises()
+    if (templateId) {
+      templates
+        .get(templateId)
+        .then((t) => setQuickPicks(t.exercises.map((te) => te.exercise)))
+        .catch(() => setQuickPicks([]))
+    }
+  }, [templateId, loadExercises])
+
+  const exerciseMap = useCallback(() => {
+    const map = new Map<string, Exercise>()
+    exerciseList.forEach((ex) => map.set(ex.id, ex))
+    return map
+  }, [exerciseList])
+
   const handleAddSet = useCallback(async () => {
     if (!workout || !selectedExercise) return
     try {
-      const setNumber = (workout.sets?.filter((s) => s.exercise_id === selectedExercise).length || 0) + 1
+      const setNumber = (workout.sets?.filter((s) => s.exercise_id === selectedExercise.id).length || 0) + 1
       await workouts.addSet(workout.id, {
-        exercise_id: selectedExercise,
+        exercise_id: selectedExercise.id,
         set_number: setNumber,
         reps,
         weight: weight || undefined,
@@ -91,13 +119,20 @@ export function WorkoutSession({ profile, templateId, onDone }: Props) {
       <div className="bg-bg-secondary rounded-lg p-4 mb-4">
         <h3 className="font-semibold mb-3">Log Set</h3>
 
-        <input
-          type="text"
-          placeholder="Exercise ID"
-          value={selectedExercise}
-          onChange={(e) => setSelectedExercise(e.target.value)}
-          className="w-full bg-bg-tertiary border border-border rounded-lg px-3 py-2 mb-3 text-sm"
+        <ExercisePicker
+          exercises={exerciseList}
+          quickPicks={quickPicks}
+          onSelect={setSelectedExercise}
         />
+        {listError && (
+          <div className="flex items-center justify-between text-red-500 text-xs mb-3">
+            <span>{listError}</span>
+            <button className="underline" onClick={loadExercises}>Retry</button>
+          </div>
+        )}
+        {selectedExercise && (
+          <p className="text-xs text-text-secondary mb-3">Selected: {selectedExercise.name}</p>
+        )}
 
         <div className="grid grid-cols-3 gap-2 mb-3">
           <div>
@@ -175,10 +210,12 @@ export function WorkoutSession({ profile, templateId, onDone }: Props) {
       <div>
         <h3 className="font-semibold mb-2">Sets Logged ({workout.sets?.length || 0})</h3>
         <div className="space-y-2">
-          {workout.sets?.map((set) => (
+          {workout.sets?.map((set) => {
+            const name = exerciseMap().get(set.exercise_id)?.name || set.exercise_id
+            return (
             <div key={set.id} className="bg-bg-secondary rounded-lg p-3">
               <div className="flex justify-between items-center">
-                <span className="font-medium">Set {set.set_number}</span>
+                <span className="font-medium">{name} — Set {set.set_number}</span>
                 <span className="text-sm text-text-secondary">{set.reps} reps</span>
               </div>
               {set.weight && <p className="text-sm text-text-secondary">{set.weight} kg</p>}
@@ -187,7 +224,8 @@ export function WorkoutSession({ profile, templateId, onDone }: Props) {
               )}
               {set.notes && <p className="text-xs text-text-secondary mt-1">{set.notes}</p>}
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>
