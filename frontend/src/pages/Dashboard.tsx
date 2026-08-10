@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Play, History } from 'lucide-react'
 import useSWR from 'swr'
-import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { useExercises } from '../hooks/useExercises'
 import { workouts } from '../api/client'
@@ -19,10 +18,11 @@ export function Dashboard() {
         <p className="text-muted-foreground text-sm">¿Listo para entrenar?</p>
       </header>
 
-      <Link to="/sesion" className="block">
-        <Button className="w-full py-4 text-lg">
-          <Play size={20} /> Iniciar sesión
-        </Button>
+      <Link
+        to="/sesion"
+        className="w-full min-h-11 rounded-lg bg-primary text-on-primary font-medium px-4 py-3 flex items-center justify-center gap-2 transition-colors duration-200 cursor-pointer"
+      >
+        <Play size={20} /> Iniciar sesión
       </Link>
 
       <section>

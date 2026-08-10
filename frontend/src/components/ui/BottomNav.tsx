@@ -10,7 +10,7 @@ const items = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-0 inset-x-0 border-t border-border bg-card pb-[env(safe-area-inset-bottom)]">
+    <nav aria-label="Navegación principal" className="fixed bottom-0 inset-x-0 border-t border-border bg-card pb-[env(safe-area-inset-bottom)]">
       <div className="flex">
         {items.map(({ to, label, icon: Icon }) => (
           <NavLink

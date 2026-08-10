@@ -19,6 +19,12 @@ export function WorkoutSession() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (rest <= 0) return
+    const id = setTimeout(() => setRest((r) => r - 1), 1000)
+    return () => clearTimeout(id)
+  }, [rest])
+
+  useEffect(() => {
     profiles
       .list()
       .then(async (list) => {
@@ -46,6 +52,7 @@ export function WorkoutSession() {
         rest_seconds: rest,
       })
       setWorkout(await workouts.get(workout.id))
+      setRest(rest)
     } catch (err) {
       setError((err as Error).message || 'Error al agregar serie')
     }
@@ -53,8 +60,12 @@ export function WorkoutSession() {
 
   const handleFinish = useCallback(async () => {
     if (!workout) return
-    await workouts.update(workout.id, { completed_at: new Date().toISOString() })
-    setError(null)
+    try {
+      await workouts.update(workout.id, { completed_at: new Date().toISOString() })
+      setError(null)
+    } catch (err) {
+      setError((err as Error).message || 'Error al finalizar sesión')
+    }
   }, [workout])
 
   if (!workout) {
@@ -90,7 +101,7 @@ export function WorkoutSession() {
               key={ex.id}
               onClick={() => setSelectedId(ex.id)}
               className={
-                'text-left p-2 rounded-lg transition-colors cursor-pointer ' +
+                'text-left min-h-11 p-2 rounded-lg transition-colors cursor-pointer ' +
                 (selectedId === ex.id ? 'bg-primary/20 border border-primary' : 'bg-muted hover:bg-muted/70')
               }
             >
@@ -99,9 +110,9 @@ export function WorkoutSession() {
           ))}
         </div>
         <div className="grid grid-cols-3 gap-2 mb-3">
-          <Input type="number" label="Reps" value={reps} onChange={(e) => setReps(Number(e.target.value))} />
-          <Input type="number" label="Peso (kg)" value={weight} onChange={(e) => setWeight(Number(e.target.value))} />
-          <Input type="number" label="Descanso (s)" value={rest} onChange={(e) => setRest(Number(e.target.value))} />
+          <Input type="number" name="reps" label="Reps" value={reps} onChange={(e) => setReps(Number(e.target.value))} />
+          <Input type="number" name="weight" label="Peso (kg)" value={weight} onChange={(e) => setWeight(Number(e.target.value))} />
+          <Input type="number" name="rest" label="Descanso (s)" value={rest} onChange={(e) => setRest(Number(e.target.value))} />
         </div>
         <Button className="w-full" onClick={handleAddSet} disabled={!selectedId}>
           <Plus size={18} /> Agregar serie
