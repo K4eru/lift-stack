@@ -1,0 +1,13 @@
+{
+  "name": "lift-stack",
+  "short_name": "lift-stack",
+  "description": "Entrenador de ejercicios en español",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1F2937",
+  "theme_color": "#1F2937",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
