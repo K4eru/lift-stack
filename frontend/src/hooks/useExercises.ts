@@ -1,4 +1,4 @@
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 import { exercises as api } from '../api/client'
 import type { Exercise } from '../api/types'
 
@@ -16,6 +16,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export function useExercises() {
   const { data: raw, error, mutate } = useSWR<Exercise[]>('exercises', () => api.list())
+  const { mutate: globalMutate } = useSWRConfig()
   const { data: translations } = useSWR<Record<string, Translation>>('translations', () =>
     fetcher('/exercises-es.json'),
   )
@@ -32,5 +33,10 @@ export function useExercises() {
   const map = new Map<string, SpanishExercise>()
   for (const ex of exercises) map.set(ex.id, ex)
 
-  return { exercises, map, isLoading: !raw && !error, error, refresh: mutate }
+  const refresh = () => {
+    mutate()
+    void globalMutate('translations')
+  }
+
+  return { exercises, map, isLoading: !raw && !error, error, refresh }
 }

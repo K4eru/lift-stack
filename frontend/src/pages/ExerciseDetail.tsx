@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { useExercises } from '../hooks/useExercises'
+import { CATEGORY_ES, EQUIPMENT_ES } from '../lib/categories'
 
 export function ExerciseDetail() {
   const { id } = useParams<{ id: string }>()
@@ -16,7 +17,7 @@ export function ExerciseDetail() {
       {ex?.goal && <p className="text-accent mb-4">{ex.goal}</p>}
       {ex?.category && (
         <p className="text-sm text-muted-foreground mb-4">
-          {ex.category} • {ex.equipment}
+          {CATEGORY_ES[ex.category] ?? ex.category} • {EQUIPMENT_ES[ex.equipment] ?? ex.equipment}
         </p>
       )}
       {ex?.instructions?.es && (

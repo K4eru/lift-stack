@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FixedSizeList } from 'react-window'
 import { Input } from '../components/ui/Input'
@@ -8,11 +8,29 @@ import { cn } from '../lib/utils'
 
 const CATEGORIES = ['Todas', 'Pecho', 'Espalda', 'Pierna', 'Brazo', 'Hombro', 'Core'] as const
 
+const CHIP_TO_EN: Record<string, string> = {
+  Pecho: 'chest',
+  Espalda: 'back',
+  Pierna: 'upper legs',
+  Brazo: 'upper arms',
+  Hombro: 'shoulders',
+  Core: 'waist',
+}
+
 export function ExerciseBrowser() {
   const { exercises, isLoading, error, refresh } = useExercises()
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState<string>('Todas')
   const navigate = useNavigate()
+  const [viewportH, setViewportH] = useState(window.innerHeight)
+
+  useEffect(() => {
+    const onR = () => setViewportH(window.innerHeight)
+    window.addEventListener('resize', onR)
+    return () => window.removeEventListener('resize', onR)
+  }, [])
+
+  const listHeight = Math.max(200, viewportH - 260)
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase()
@@ -20,15 +38,7 @@ export function ExerciseBrowser() {
       const name = (ex.name_es ?? ex.name).toLowerCase()
       if (q && !name.includes(q)) return false
       if (category === 'Todas') return true
-      const map: Record<string, string> = {
-        Pecho: 'chest',
-        Espalda: 'back',
-        Pierna: 'upper legs',
-        Brazo: 'upper arms',
-        Hombro: 'shoulders',
-        Core: 'waist',
-      }
-      return ex.category === map[category]
+      return ex.category === CHIP_TO_EN[category]
     })
   }, [exercises, search, category])
 
@@ -75,7 +85,7 @@ export function ExerciseBrowser() {
 
       {!isLoading && !error && filtered.length > 0 && (
         <FixedSizeList
-          height={500}
+          height={listHeight}
           width="100%"
           itemCount={filtered.length}
           itemSize={76}
