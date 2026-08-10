@@ -19,6 +19,12 @@ export function WorkoutSession() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (rest <= 0) return
+    const id = setTimeout(() => setRest((r) => r - 1), 1000)
+    return () => clearTimeout(id)
+  }, [rest])
+
+  useEffect(() => {
     profiles
       .list()
       .then(async (list) => {
@@ -46,6 +52,7 @@ export function WorkoutSession() {
         rest_seconds: rest,
       })
       setWorkout(await workouts.get(workout.id))
+      setRest(rest)
     } catch (err) {
       setError((err as Error).message || 'Error al agregar serie')
     }

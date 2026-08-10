@@ -1,12 +1,5 @@
-import { useEffect } from 'react'
-
+// ponytail: parent owns countdown state, RestTimer renders
 export function RestTimer({ seconds, onSkip }: { seconds: number; onSkip: () => void }) {
-  useEffect(() => {
-    if (seconds <= 0) return
-    const id = setTimeout(() => onSkip(), 1000)
-    return () => clearTimeout(id)
-  }, [seconds, onSkip])
-
   if (seconds <= 0) return null
 
   return (
