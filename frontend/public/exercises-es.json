@@ -1,0 +1,402 @@
+{
+  "0001": {
+    "name": "Abdominales 3/4",
+    "goal": "Fortalece el abdomen y el core."
+  },
+  "0002": {
+    "name": "Flexión lateral a 45 grados",
+    "goal": "Fortalece los oblicuos."
+  },
+  "0003": {
+    "name": "Bicicleta abdominal",
+    "goal": "Trabaja los abdominales y los oblicuos."
+  },
+  "0023": {
+    "name": "Curl de bíceps alternado con barra",
+    "goal": "Trabaja cada brazo por separado."
+  },
+  "0025": {
+    "name": "Press de banca con barra",
+    "goal": "Fortalece el pecho, los hombros y los tríceps."
+  },
+  "0026": {
+    "name": "Sentadilla en banco con barra",
+    "goal": "Trabaja las piernas con seguridad."
+  },
+  "0027": {
+    "name": "Remo con barra",
+    "goal": "Desarrolla los dorsales y el centro de la espalda."
+  },
+  "0031": {
+    "name": "Curl de bíceps con barra",
+    "goal": "Desarrolla los bíceps."
+  },
+  "0032": {
+    "name": "Peso muerto",
+    "goal": "Fortalece toda la cadena posterior."
+  },
+  "0033": {
+    "name": "Press de banca declinado con barra",
+    "goal": "Trabaja la parte inferior del pecho."
+  },
+  "0042": {
+    "name": "Sentadilla frontal",
+    "goal": "Desarrolla cuádriceps y espalda alta."
+  },
+  "0043": {
+    "name": "Sentadilla completa con barra",
+    "goal": "Fortalece piernas, glúteos y core."
+  },
+  "0044": {
+    "name": "Buenos días",
+    "goal": "Fortalece la cadena posterior y el core."
+  },
+  "0046": {
+    "name": "Sentadilla hack con barra",
+    "goal": "Fortalece los cuádriceps."
+  },
+  "0047": {
+    "name": "Press de banca inclinado con barra",
+    "goal": "Desarrolla la parte superior del pecho y los hombros."
+  },
+  "0054": {
+    "name": "Zancadas con barra",
+    "goal": "Fortalece piernas y glúteos."
+  },
+  "0056": {
+    "name": "Extensión de tríceps con agarre cerrado",
+    "goal": "Fortalece los tríceps."
+  },
+  "0060": {
+    "name": "Press francés",
+    "goal": "Trabaja los tres haces del tríceps."
+  },
+  "0061": {
+    "name": "Extensión de tríceps tumbado con barra",
+    "goal": "Desarrolla los tríceps."
+  },
+  "0070": {
+    "name": "Curl en banco Scott con barra",
+    "goal": "Desarrolla los bíceps."
+  },
+  "0073": {
+    "name": "Pullover con barra",
+    "goal": "Fortalece los dorsales y el pecho."
+  },
+  "0075": {
+    "name": "Elevaciones posteriores con barra",
+    "goal": "Fortalece la parte posterior del hombro."
+  },
+  "0080": {
+    "name": "Curl invertido con barra",
+    "goal": "Fortalece los antebrazos y el braquial."
+  },
+  "0085": {
+    "name": "Peso muerto rumano",
+    "goal": "Desarrolla los isquiotibiales y los glúteos."
+  },
+  "0091": {
+    "name": "Press militar sentado con barra",
+    "goal": "Fortalece los hombros y el core."
+  },
+  "0095": {
+    "name": "Encogimientos con barra",
+    "goal": "Fortalece los trapecios."
+  },
+  "0099": {
+    "name": "Sentadilla búlgara con barra",
+    "goal": "Trabaja las piernas de forma unilateral."
+  },
+  "0108": {
+    "name": "Elevación de talones con barra",
+    "goal": "Desarrolla los gemelos."
+  },
+  "0114": {
+    "name": "Paso arriba con barra",
+    "goal": "Desarrolla las piernas de forma unilateral."
+  },
+  "0116": {
+    "name": "Peso muerto con piernas rígidas",
+    "goal": "Trabaja la cadena posterior y la flexibilidad."
+  },
+  "0117": {
+    "name": "Peso muerto sumo",
+    "goal": "Fortalece piernas, glúteos y espalda."
+  },
+  "0118": {
+    "name": "Remo con barra y agarre supino",
+    "goal": "Trabaja los dorsales y los bíceps."
+  },
+  "0120": {
+    "name": "Remo al mentón con barra",
+    "goal": "Fortalece hombros y trapecios."
+  },
+  "0129": {
+    "name": "Fondos de tríceps en banco",
+    "goal": "Desarrolla los tríceps con el propio peso."
+  },
+  "0175": {
+    "name": "Crunch de rodillas en polea",
+    "goal": "Fortalece el abdomen con carga."
+  },
+  "0201": {
+    "name": "Extensión de tríceps en polea",
+    "goal": "Fortalece los tríceps."
+  },
+  "0221": {
+    "name": "Flexión lateral en polea",
+    "goal": "Fortalece los oblicuos."
+  },
+  "0251": {
+    "name": "Fondos para pecho",
+    "goal": "Fortalece el pecho y los tríceps con el propio peso."
+  },
+  "0267": {
+    "name": "Crunch con brazos extendidos",
+    "goal": "Fortalece la parte superior del abdomen."
+  },
+  "0279": {
+    "name": "Flexiones declinadas",
+    "goal": "Trabaja la parte superior del pecho y los hombros."
+  },
+  "0282": {
+    "name": "Abdominales declinados",
+    "goal": "Desarrolla la parte superior del abdomen."
+  },
+  "0284": {
+    "name": "Elevación de talones de burro",
+    "goal": "Fortalece los gemelos."
+  },
+  "0285": {
+    "name": "Curl de bíceps alternado con mancuernas",
+    "goal": "Trabaja los bíceps de forma unilateral."
+  },
+  "0289": {
+    "name": "Press de pecho con mancuernas",
+    "goal": "Fortalece el pecho y mejora la estabilidad de los hombros."
+  },
+  "0293": {
+    "name": "Remo con mancuerna",
+    "goal": "Fortalece los dorsales y corrige desequilibrios."
+  },
+  "0294": {
+    "name": "Curl de bíceps con mancuernas",
+    "goal": "Fortalece y desarrolla los bíceps."
+  },
+  "0297": {
+    "name": "Curl concentrado",
+    "goal": "Aísla los bíceps."
+  },
+  "0300": {
+    "name": "Peso muerto con mancuernas",
+    "goal": "Fortalece la cadena posterior."
+  },
+  "0301": {
+    "name": "Press declinado con mancuernas",
+    "goal": "Trabaja la parte inferior del pecho y los tríceps."
+  },
+  "0308": {
+    "name": "Aperturas con mancuernas",
+    "goal": "Aísla y desarrolla el pectoral."
+  },
+  "0310": {
+    "name": "Elevaciones frontales",
+    "goal": "Fortalece el deltoide anterior."
+  },
+  "0313": {
+    "name": "Curl martillo",
+    "goal": "Fortalece los bíceps y el antebrazo."
+  },
+  "0314": {
+    "name": "Press inclinado con mancuernas",
+    "goal": "Desarrolla la parte superior del pecho."
+  },
+  "0318": {
+    "name": "Curl inclinado con mancuernas",
+    "goal": "Trabaja la parte larga del bíceps."
+  },
+  "0333": {
+    "name": "Patada de tríceps",
+    "goal": "Aísla y fortalece los tríceps."
+  },
+  "0334": {
+    "name": "Elevaciones laterales",
+    "goal": "Desarrolla los deltoides laterales."
+  },
+  "0336": {
+    "name": "Zancadas con mancuernas",
+    "goal": "Trabaja las piernas y mejora el equilibrio."
+  },
+  "0356": {
+    "name": "Elevación lateral con un brazo",
+    "goal": "Trabaja cada deltoide por separado."
+  },
+  "0372": {
+    "name": "Curl en banco Scott con mancuernas",
+    "goal": "Aísla los bíceps."
+  },
+  "0375": {
+    "name": "Pullover con mancuerna",
+    "goal": "Fortalece el pecho y los dorsales."
+  },
+  "0383": {
+    "name": "Aperturas inversas",
+    "goal": "Fortalece el deltoide posterior."
+  },
+  "0405": {
+    "name": "Press de hombros sentado con mancuernas",
+    "goal": "Desarrolla los deltoides."
+  },
+  "0406": {
+    "name": "Encogimientos con mancuernas",
+    "goal": "Desarrolla los trapecios."
+  },
+  "0413": {
+    "name": "Sentadilla con mancuernas",
+    "goal": "Fortalece las piernas y los glúteos."
+  },
+  "0426": {
+    "name": "Press de hombros de pie con mancuernas",
+    "goal": "Fortalece los hombros."
+  },
+  "0431": {
+    "name": "Paso arriba con mancuernas",
+    "goal": "Fortalece cuádriceps y glúteos."
+  },
+  "0432": {
+    "name": "Peso muerto con piernas rígidas y mancuernas",
+    "goal": "Desarrolla los isquiotibiales."
+  },
+  "0437": {
+    "name": "Remo al mentón con mancuernas",
+    "goal": "Trabaja hombros y trapecios."
+  },
+  "0464": {
+    "name": "Plancha frontal con giro",
+    "goal": "Fortalece el core y los oblicuos."
+  },
+  "0472": {
+    "name": "Elevación de piernas colgado",
+    "goal": "Desarrolla el abdomen inferior."
+  },
+  "0493": {
+    "name": "Flexiones inclinadas",
+    "goal": "Fortalece el pecho de forma progresiva con menor carga."
+  },
+  "0495": {
+    "name": "Abdominales con giro en banco inclinado",
+    "goal": "Desarrolla los oblicuos."
+  },
+  "0499": {
+    "name": "Remo invertido",
+    "goal": "Desarrolla la espalda con el propio peso."
+  },
+  "0507": {
+    "name": "Abdominales navaja",
+    "goal": "Trabaja el abdomen y los flexores de cadera."
+  },
+  "0514": {
+    "name": "Sentadilla con salto",
+    "goal": "Mejora la potencia de las piernas."
+  },
+  "0549": {
+    "name": "Balanceo con kettlebell",
+    "goal": "Desarrolla glúteos, core y condición física."
+  },
+  "0620": {
+    "name": "Elevación de piernas tumbado",
+    "goal": "Fortalece el abdomen inferior."
+  },
+  "0630": {
+    "name": "Escaladores",
+    "goal": "Trabaja el core y la condición física."
+  },
+  "0652": {
+    "name": "Dominadas",
+    "goal": "Desarrolla la espalda y los bíceps."
+  },
+  "0662": {
+    "name": "Flexiones",
+    "goal": "Fortalece el pecho, los hombros y el core."
+  },
+  "0674": {
+    "name": "Dominadas con agarre inverso",
+    "goal": "Fortalece los dorsales y mejora la fuerza de agarre."
+  },
+  "0685": {
+    "name": "Correr",
+    "goal": "Mejora la resistencia cardiovascular."
+  },
+  "0687": {
+    "name": "Giros rusos",
+    "goal": "Fortalece los oblicuos."
+  },
+  "0689": {
+    "name": "Elevación de piernas sentado",
+    "goal": "Trabaja el abdomen y el core."
+  },
+  "0743": {
+    "name": "Sentadilla hack en máquina",
+    "goal": "Desarrolla cuádriceps y glúteos."
+  },
+  "0873": {
+    "name": "Crunch inverso en polea",
+    "goal": "Trabaja el abdomen inferior."
+  },
+  "1160": {
+    "name": "Burpees",
+    "goal": "Mejora la condición física y quema calorías."
+  },
+  "1273": {
+    "name": "Flexiones con palmada",
+    "goal": "Mejora la potencia y explosividad del tren superior."
+  },
+  "1311": {
+    "name": "Flexiones con agarre amplio",
+    "goal": "Desarrolla el pecho y los hombros."
+  },
+  "1326": {
+    "name": "Dominadas con agarre supino",
+    "goal": "Fortalece la espalda y enfatiza los bíceps."
+  },
+  "1327": {
+    "name": "Dominadas con agarre cerrado",
+    "goal": "Trabaja los dorsales y los bíceps."
+  },
+  "1373": {
+    "name": "Elevación de talones de pie",
+    "goal": "Fortalece los gemelos."
+  },
+  "1409": {
+    "name": "Puente de glúteos con barra",
+    "goal": "Desarrolla los glúteos."
+  },
+  "1760": {
+    "name": "Sentadilla goblet",
+    "goal": "Mejora la técnica de sentadilla y el core."
+  },
+  "2137": {
+    "name": "Press Arnold",
+    "goal": "Desarrolla todos los haces del hombro."
+  },
+  "2292": {
+    "name": "Elevaciones posteriores con mancuernas",
+    "goal": "Desarrolla el deltoide posterior."
+  },
+  "2462": {
+    "name": "Fondos en barra recta",
+    "goal": "Trabaja el pecho y los tríceps en un rango profundo."
+  },
+  "2612": {
+    "name": "Saltar a la comba",
+    "goal": "Mejora la resistencia y la coordinación."
+  },
+  "3017": {
+    "name": "Remo Pendlay",
+    "goal": "Fortalece los dorsales con mayor potencia."
+  },
+  "3168": {
+    "name": "Remo en cuclillas con el propio peso",
+    "goal": "Fortalece la espalda sin material."
+  }
+}
