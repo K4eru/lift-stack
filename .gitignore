@@ -223,3 +223,7 @@ docs/superpowers/
 
 ./docs/superpowers/
 
+# Frontend lib utilities (overrides Python lib/ ignore pattern above)
+!frontend/src/lib/
+!frontend/src/lib/utils.ts
+
